@@ -1,0 +1,94 @@
+.header-text {
+    text-align: center;
+    flex:1;
+    font-size: 30px;
+}
+
+.back-button {
+    margin-right: 10px;
+    margin-left: auto;
+}
+
+.row-container {
+    display: flex;
+    align-items: center;
+}
+
+.button-container {
+    text-align: center;
+}
+
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+  
+.form-row {
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+.header2-text {
+    font-size: 20px;
+    text-decoration: underline;
+}
+
+.left-section,
+.middle-section,
+.right-section {
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.vertical-line {
+    width: 1px;
+    background-color: #847f7f;
+}
+
+.recipe-title {
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration:underline;
+}
+
+.grid-container {
+    display: flex;
+}
+
+button:hover {
+    outline: 2px solid #2a88a4;
+    box-shadow: 0px 10px 20px rgba(67, 165, 178, 0.518);
+}
+
+.recipe-text {
+    font-size: 16px;
+}
+
+.recipe-header {
+    margin-top: -20px;
+    text-align: center;
+    justify-content: center;
+}
+
+.header-text,
+.header2-text,
+.recipe-text,
+.recipe-title,
+button,
+p,
+i {
+    font-family: 'Galindo', cursive;
+}
+
+.header2-text,
+.recipe-text,
+.recipe-title,
+p {
+    color: #147d9d;
+}
+  

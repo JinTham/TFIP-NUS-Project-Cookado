@@ -1,0 +1,203 @@
+<!-- <h3>Create your own recipe  <button [routerLink]="['/recipe',userId]">Back</button></h3>
+<br>
+<form [formGroup]="form" (ngSubmit)="processForm()">
+    <table>
+        <tr>
+            <td>Recipe title: </td>
+            <td><input type="text" formControlName="recipeTitle"></td>
+        </tr>
+        <tr>
+            <td>Preparation time (min): </td>
+            <td><input type="number" formControlName="readyInMinutes"></td>
+        </tr>
+        <tr>
+            <td>Summary: </td>
+            <td><input type="text" formControlName="summary"></td>
+        </tr>
+        <tr>
+            <td>Cuisine: </td>
+            <select formControlName="cuisine">
+                <option *ngFor="let cuisine of cuisineOptions.options" value="{{cuisine}}">{{cuisine}}</option>
+            </select>
+        </tr>
+        <tr>
+            <td>Instructions: </td>
+            <td><textarea formControlName="instructions" cols="30" rows="10"></textarea></td>
+        </tr>
+        <tr>
+            <td>Image: </td>
+            <td>
+                <input type="file" id="fileInput" accept="image/*" placeholder="upload one photo">
+            </td>
+        </tr>
+        <tr>
+            <td>Ingredients: </td>
+            <td><button type="button" (click)="addIngredient()">+</button></td>
+        </tr>
+        <tbody formArrayName="extendedIngredients" *ngFor="let ingredient of extendedIngredients.controls; let idx = index">
+            <tr [formGroupName]="idx">
+                <td><input type="text" formControlName="ingredientName" placeholder="Ingredient name"></td>
+                <td><input type="number" formControlName="amount" placeholder="amount"></td>
+                <td><input type="text" formControlName="unit" placeholder="unit"></td>
+                <td><button type="button" (click)="removeIngredient(idx)">x</button></td>
+            </tr>
+        </tbody>
+        <tr>
+            <td><button button="submit" [disabled]="form.invalid">Create</button></td>
+        </tr>
+    </table>
+</form>
+
+<hr>
+<h3>Your own recipe list</h3>
+<table border=1 *ngIf="ownRecipeList; else NoRecipes">
+    <thead>
+        <td>Recipe Title</td>
+        <td>Created datetime</td>
+    </thead>
+    <tbody>
+        <tr *ngFor="let recipe of ownRecipeList; let idx = index">
+            <td>{{recipe.recipe.recipeTitle}}</td>
+            <td>{{recipe.createDatetime}}</td>
+            <td><button type="button" (click)="showRecipe(idx)">Show</button></td>
+            <td><button type="button" (click)="deleteRecipe(recipe.recipe.recipeId,recipe.recipe.recipeTitle)">X</button></td>
+        </tr>
+    </tbody>
+</table>
+
+<div *ngIf="showRecipeInfo">
+    <tr>{{recipe.recipeTitle}} ({{recipe.cuisine}}) --- {{recipe.readyInMinutes}}min</tr>
+    <tr><img src="{{recipe.image}}" alt="" width="100" height="100"></tr>
+    <tr>Summary: {{recipe.summary}}</tr>
+    <tr>Instructions: {{recipe.instructions}}</tr>
+    <tr>Ingredients:</tr>
+    <tr><div *ngFor="let ingredient of recipe.extendedIngredients">
+        {{ingredient.ingredientName}} -- {{ingredient.amount}}{{ingredient.unit}}
+    </div></tr>
+    <tr><button type="button" (click)="hideRecipe()">Hide</button></tr>
+</div>
+
+<ng-template #NoRecipes>
+    <p>You have not created any recipe of your own!</p>
+</ng-template> -->
+
+<div class="row-container">
+    <p class="header-text">Recipe creation page</p>
+    <button class="back-button" mat-raised-button color="accent" [routerLink]="['/recipe', userId]">Back</button>
+</div>
+<hr>
+<div class="container">
+    <div class="left-section">
+      <h3 class="header2-text">Create your own recipe </h3>
+      <div class="form-container">
+        <form [formGroup]="form" (ngSubmit)="processForm()">
+            <div class="form-row">
+                <label class="header3-text">Upload food image:</label>&nbsp;
+                <input type="file" id="fileInput" accept="image/*">
+            </div>
+            <br>
+          <div class="form-row">
+            <div class="input-row">
+              <mat-form-field appearance="outline">
+                <mat-label>Recipe title:</mat-label>
+                <input matInput type="text" formControlName="recipeTitle">
+              </mat-form-field>
+            </div>
+            <div class="input-row">
+              <mat-form-field appearance="outline">
+                <mat-label>Preparation time (min):</mat-label>
+                <input matInput type="number" formControlName="readyInMinutes">
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="input-row">
+                <mat-form-field appearance="outline">
+                <mat-label>Summary:</mat-label>
+                <input matInput type="text" formControlName="summary">
+                </mat-form-field>
+            </div>
+            <div class="input-row">
+                <mat-form-field appearance="outline">
+                <mat-label>Cuisine:</mat-label>
+                <mat-select formControlName="cuisine">
+                    <mat-option *ngFor="let cuisine of cuisineOptions.options" [value]="cuisine">{{cuisine}}</mat-option>
+                </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="form-row">
+            <mat-form-field appearance="outline" class="wider-input">
+              <mat-label>Instructions:</mat-label>
+              <textarea matInput type="text" formControlName="instructions" rows="5"></textarea>
+            </mat-form-field>
+          </div>          
+          <div class="form-row">
+            <label class="header3-text">Ingredients:</label>
+            <button mat-icon-button type="button" (click)="addIngredient()"><mat-icon>add</mat-icon></button>
+          </div>
+          <div formArrayName="extendedIngredients" *ngFor="let ingredient of extendedIngredients.controls; let idx = index">
+            <div [formGroupName]="idx" class="ingredient-row">
+              <mat-form-field appearance="outline">
+                <input matInput type="text" formControlName="ingredientName" placeholder="Ingredient name">
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <input matInput type="number" formControlName="amount" placeholder="amount">
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <input matInput type="text" formControlName="unit" placeholder="unit">
+              </mat-form-field>
+              <button mat-icon-button type="button" (click)="removeIngredient(idx)"><mat-icon>close</mat-icon></button>
+            </div>
+          </div>
+          <div class="form-row">
+            <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Create</button>
+          </div>
+        </form>
+      </div>      
+    </div>
+  
+    <div class="vertical-line"></div>
+  
+    <div class="right-section">
+      <h3 class="header2-text">Your own recipe list</h3>
+      <table mat-table [dataSource]="ownRecipeList" class="mat-elevation-z8" *ngIf="ownRecipeList; else NoRecipes">
+        <ng-container matColumnDef="recipeTitle">
+          <th mat-header-cell *matHeaderCellDef>Recipe Title</th>
+          <td mat-cell *matCellDef="let recipe">{{recipe.recipe.recipeTitle}}</td>
+        </ng-container>
+        <ng-container matColumnDef="createDatetime">
+          <th mat-header-cell *matHeaderCellDef>Created datetime</th>
+          <td mat-cell *matCellDef="let recipe">{{recipe.createDatetime}}</td>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let recipe; let idx=index">
+            <button mat-button type="button" (click)="showRecipe(idx)"><mat-icon>notes</mat-icon></button>
+            <button mat-button type="button" (click)="deleteRecipe(recipe.recipe.recipeId,recipe.recipe.recipeTitle)"><mat-icon>delete</mat-icon></button>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="['recipeTitle', 'createDatetime', 'actions']"></tr>
+        <tr mat-row *matRowDef="let row; columns: ['recipeTitle', 'createDatetime', 'actions']"></tr>
+      </table>
+  
+      <ng-template #NoRecipes>
+        <p class="empty-text">You have not created any recipe of your own!</p>
+      </ng-template>
+  
+    <br><hr>
+  
+    <div *ngIf="showRecipeInfo">
+      <p><span class="recipe-title">{{recipe.recipeTitle}} ({{recipe.cuisine}}) --- {{recipe.readyInMinutes}}min</span></p>
+      <img [src]="recipe.image" alt="" width="200" height="200">
+      <p><strong>Summary: </strong><span [innerHTML]="recipe.summary"></span></p>
+      <p><strong>Instructions: </strong><span [innerHTML]="recipe.instructions"></span></p>
+      <div *ngFor="let ingredient of recipe.extendedIngredients">
+        <i>{{ingredient.ingredientName}} -- {{ingredient.amount}}{{ingredient.unit}}</i>
+      </div>
+      <br>
+      <button mat-raised-button color="accent" type="button" (click)="hideRecipe()">Hide</button>
+    </div>
+    </div>
+  </div>
+  

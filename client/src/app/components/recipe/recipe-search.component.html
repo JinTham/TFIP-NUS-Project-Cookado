@@ -1,0 +1,169 @@
+<!-- <form [formGroup]="form" (ngSubmit)="processForm()">
+    <table>
+        <tr>
+            <td>
+                <input type="text" formControlName="searchText" placeholder="Food name keyword">
+            </td>
+            <td>
+                <select formControlName="cuisine">
+                    <option selected value="">All cuisines</option>
+                    <option *ngFor="let cuisine of cuisineOptions.options" value="{{cuisine}}">{{cuisine}}</option>
+                </select>
+            </td>
+            <td>
+                <input type="number" formControlName="maxReadyTime" placeholder="Max preparation time">
+            </td>
+            <td>
+                <button type="submit" [disabled]="form.invalid">Search recipes</button>
+            </td>
+        </tr>
+    </table>
+</form> -->
+
+<div class="row-container">
+    <p class="header-text">Recipe page</p>
+    <button class="back-button" mat-raised-button color="accent" [routerLink]="['/frontpage', userId]">Back</button>
+</div>
+<hr>
+
+<div class="button-container">
+    <button mat-raised-button color="primary" [routerLink]="['/recipe/create',userId]">Create own recipe</button>&nbsp;&nbsp;
+    <button mat-raised-button color="primary" [routerLink]="['/recipe/cookRecord',userId]">Check cooking history</button>&nbsp;&nbsp;
+    <span *ngIf="privilege">
+        <button mat-raised-button color="primary" [routerLink]="['/recipe/follow',userId]">Check followee/follower</button>
+    </span>
+    <span *ngIf="!privilege">
+        <button mat-raised-button color="primary" disabled>Check followee/follower</button>
+    </span>
+</div>
+
+<hr><br>
+<div class="form-container">
+    <form [formGroup]="form" (ngSubmit)="processForm()">
+        <table>
+          <tr>
+            <td>
+              <mat-form-field appearance="fill">
+                <mat-label>Food name keyword</mat-label>
+                <input matInput type="text" formControlName="searchText" placeholder="Food name keyword">
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field appearance="fill">
+                <mat-label>Cuisine</mat-label>
+                <mat-select formControlName="cuisine" placeholder="All cuisines">
+                  <mat-option value="">All cuisines</mat-option>
+                  <mat-option *ngFor="let cuisine of cuisineOptions.options" [value]="cuisine">{{ cuisine }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field appearance="fill">
+                <mat-label>Max preparation time</mat-label>
+                <input matInput type="number" formControlName="maxReadyTime" placeholder="Max preparation time">
+              </mat-form-field>
+            </td>
+            <td>
+              <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Search recipes</button>
+            </td>
+          </tr>
+        </table>
+    </form>      
+</div>
+<hr>
+
+<div class="grid-container" *ngIf="!init">
+        <div class="left-section" *ngIf="SpoonacularRecipes; else NoRecipes">
+            <h4 class="header2-text">By Spoonacular</h4>
+                <div *ngFor="let recipe of SpoonacularRecipes; let idx = index">
+                    <mat-card>
+                    <mat-card-header class="recipe-header">
+                        <mat-card-title class="recipe-text">{{recipe.recipeTitle}}
+                            <button mat-button type="button" (click)="getRecipeInfoSpoonacular(idx)"><mat-icon>notes</mat-icon></button>
+                        </mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <img mat-card-image src="{{recipe.image}}" alt="" height="300">
+                    </mat-card-content>
+                    </mat-card>
+                    <hr>
+                </div>
+        </div>
+        <div class="vertical-line"></div>
+        <div class="middle-section" *ngIf="MongoRecipes">
+            <h4 class="header2-text">By Users</h4>
+                <div *ngFor="let recipe of MongoRecipes; let idx = index">
+                    <mat-card>
+                    <mat-card-header class="recipe-header">
+                        <mat-card-title class="recipe-text">{{recipe.recipeTitle}}
+                            <button mat-button type="button" (click)="getRecipeInfoMongo(idx)"><mat-icon>notes</mat-icon></button>
+                        </mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <img mat-card-image src="{{recipe.image}}" alt="" height="300">
+                    </mat-card-content>
+                    </mat-card>
+                </div>
+        </div>
+        <div class="vertical-line"></div>
+        <div class="right-section">
+            <div *ngIf="recipeInfo && showRecipeInfo">
+                <p><span class="recipe-title">{{recipeInfo.recipeTitle}} ({{recipeInfo.cuisine}}) --- {{recipeInfo.readyInMinutes}}min</span></p>
+                <p><strong>Author: </strong>{{recipeInfo.author}}
+                    <span *ngIf="notSpoonacularRecipe(recipeInfo.author) && privilege">
+                        <button type="button" (click)="toAuthorPage(recipeInfo.author)">View author</button>
+                    </span>
+                </p>
+                <p><strong>Summary: </strong><span [innerHTML]="recipeInfo.summary"></span><p>
+                <p><strong>Instructions: </strong><span [innerHTML]="recipeInfo.instructions"></span></p>
+                <div *ngFor="let ingredient of recipeInfo.extendedIngredients">
+                <i>{{ingredient.ingredientName}} -- {{ingredient.amount}}{{ingredient.unit}}</i>
+                </div>
+                <br>
+                <button type="button" (click)="cook(recipeInfo.recipeId,recipeInfo.recipeTitle)">Cook this!</button>
+            </div>
+        </div>
+</div>
+
+<ng-template #NoRecipes>
+    <p>No recipe found</p>
+</ng-template>
+
+<!-- <div *ngIf="!init">
+    <h4>By Spoonacular</h4>
+    <div *ngIf="SpoonacularRecipes; else NoRecipes">
+        <div *ngFor="let recipe of SpoonacularRecipes; let idx = index">
+            <a (click)="getRecipeInfoSpoonacular(idx)">{{recipe.recipeTitle}}</a>
+            <img src="{{recipe.image}}" alt="" size="300">
+        </div>
+        <hr>
+    </div> 
+    <h4>By Users</h4> 
+    <div *ngIf="MongoRecipes; else NoRecipes">
+        <div *ngFor="let recipe of MongoRecipes; let idx = index">
+            <a (click)="getRecipeInfoMongo(idx)">{{recipe.recipeTitle}}</a>
+            <img src="{{recipe.image}}" alt="" size="300">
+        </div>
+        <hr>
+    </div>
+</div> -->
+
+<!-- <div *ngIf="recipeInfo">
+    <table>
+        <tr><td>{{recipeInfo.recipeTitle}} ({{recipeInfo.readyInMinutes}}min)</td></tr>
+        <tr><td>Author: {{recipeInfo.author}}
+            <span *ngIf="notSpoonacularRecipe(recipeInfo.author) && privilege">
+                <button type="button" (click)="toAuthorPage(recipeInfo.author)">View author</button>
+            </span>
+        </td></tr>
+        <tr><td>Cuisine: {{recipeInfo.cuisine}}</td></tr>
+        <tr><td>Summary: {{recipeInfo.summary}}</td></tr>
+        <tr><td>Instructions: {{recipeInfo.instructions}}</td></tr>
+        <tr><td>Ingredients: </td></tr>
+        <tr><div *ngFor="let ingredient of recipeInfo.extendedIngredients">
+                {{ingredient.ingredientName}} -- {{ingredient.amount}}{{ingredient.unit}}
+        </div></tr>
+        <tr><td><button type="button" (click)="cook(recipeInfo.recipeId,recipeInfo.recipeTitle)">Cook this!</button></td></tr>
+    </table>
+    <hr>
+</div> -->

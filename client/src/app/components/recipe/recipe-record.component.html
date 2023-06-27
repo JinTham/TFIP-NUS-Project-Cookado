@@ -1,0 +1,24 @@
+<div class="row-container">
+    <h3 class="header-text">Cooking records</h3>
+    <button mat-raised-button class="back-button" color="accent" [routerLink]="['/recipe', userId]">Back</button>
+</div>
+<hr>
+<ng-container *ngIf="cookRecords; else NoRecords">
+    <table mat-table [dataSource]="cookRecords" class="mat-elevation-z8">
+        <ng-container matColumnDef="timestamp">
+            <th class="table-header" mat-header-cell *matHeaderCellDef><strong>Time stamp</strong></th>
+            <td class="table-text" mat-cell *matCellDef="let record">{{ record.cookDatetime }}</td>
+        </ng-container>
+        <ng-container matColumnDef="recipeTitle">
+            <th class="table-header" mat-header-cell *matHeaderCellDef><strong>Recipe Title</strong></th>
+            <td class="table-text" mat-cell *matCellDef="let record">{{ record.recipeTitle }}</td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="['timestamp', 'recipeTitle']"></tr>
+        <tr mat-row *matRowDef="let record; columns: ['timestamp', 'recipeTitle']"></tr>
+    </table>
+</ng-container>
+
+<ng-template #NoRecords>
+    <p class="empty-text">No record</p>
+</ng-template>
+

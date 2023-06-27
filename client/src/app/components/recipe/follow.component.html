@@ -1,0 +1,64 @@
+<div class="row-container">
+    <h3 class="header-text">Followers/Followees</h3>
+    <button mat-raised-button class="back-button" color="accent" [routerLink]="['/recipe', userId]">Back</button>
+</div>
+<hr>
+<div class="grid-container">
+    <div class="left-section">
+        <h3 class="header2-text">Authors you are following:</h3>
+        <div *ngIf="followees; else NoOne">
+          <h4>Count: {{followees.length}}</h4>
+          <table mat-table [dataSource]="followees" class="mat-elevation-z8">
+            <ng-container matColumnDef="username">
+              <th mat-header-cell *matHeaderCellDef><strong>Username</strong></th>
+              <td mat-cell *matCellDef="let user">{{user.username}}</td>
+            </ng-container>
+            <ng-container matColumnDef="showAuthor">
+                <th mat-header-cell *matHeaderCellDef></th>
+                <td mat-cell *matCellDef="let user; let idx=index"><button mat-raised-button type="button" color="primary" (click)="toAuthorPage(idx)">View author</button></td>
+              </ng-container>
+            <ng-container matColumnDef="latestRecipe">
+              <th mat-header-cell *matHeaderCellDef></th>
+              <td mat-cell *matCellDef="let user"><button mat-raised-button type="button" color="primary" (click)="showLatestRecipe(user.userId)">Show latest recipe</button></td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="['username', 'showAuthor','latestRecipe']"></tr>
+            <tr mat-row *matRowDef="let user; columns: ['username', 'showAuthor', 'latestRecipe']"></tr>
+          </table>
+        </div>
+    </div>
+
+    <div class="middle-section">
+        <h3 class="header2-text">Users that are following you:</h3>
+        <div *ngIf="followers; else NoOne">
+            <h4>Count: {{followers.length}}</h4>
+            <table mat-table [dataSource]="followers" class="mat-elevation-z8">
+                <ng-container matColumnDef="username">
+                <th mat-header-cell *matHeaderCellDef><strong>Username</strong></th>
+                <td mat-cell *matCellDef="let user">{{user.username}}</td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="['username']"></tr>
+                <tr mat-row *matRowDef="let user; columns: ['username']"></tr>
+            </table>
+        </div>
+    </div>        
+
+    <div class="vertical-line"></div>
+
+    <div class="right-section">
+        <div *ngIf="latestRecipe && showRecipeInfo">
+            <p><span class="recipe-title">{{latestRecipe.recipeTitle}} ({{latestRecipe.cuisine}}) --- {{latestRecipe.readyInMinutes}}min</span></p>
+            <img [src]="latestRecipe.image" alt="" width="200" height="200">
+            <p><strong>Summary: </strong><span [innerHTML]="latestRecipe.summary"></span></p>
+            <p><strong>Instructions: </strong><span [innerHTML]="latestRecipe.instructions"></span></p>
+            <div *ngFor="let ingredient of latestRecipe.extendedIngredients">
+            <i>{{ingredient.ingredientName}} -- {{ingredient.amount}}{{ingredient.unit}}</i>
+            </div>
+            <br>
+            <button mat-raised-button color="accent" type="button" (click)="hideRecipe()">Hide</button>
+        </div>
+    </div>
+</div>
+
+<ng-template #NoOne>
+    <p class="empty-text">No one yet!</p>
+</ng-template>

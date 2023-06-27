@@ -1,0 +1,126 @@
+<!-- <h3>Ingredient Available</h3>
+<table border="1" *ngIf="groceries; else EmptyGrocery">
+    <thead>
+        <tr>
+            <td><strong>Item name</strong></td>
+            <td><strong>Quantity</strong></td>
+        </tr>
+    </thead>
+    <tbody *ngFor="let grocery of groceries; let idx = index">
+        <tr>
+            <td>{{grocery.itemName}}</td>
+            <td>{{grocery.quantity}}</td>
+            <td *ngIf="checkLowStock(grocery.itemId,grocery.quantity)">*low</td>
+        </tr>
+    </tbody>
+</table>
+<br>
+<button type="button" [routerLink]="['/grocery/record',userId]">Check grocery update records</button>
+&nbsp;
+<button type="button" [routerLink]="['/grocery/item',userId]">Add new item</button>
+<br><hr>-->
+
+<!-- <h3>Update grocery</h3>
+<form [formGroup]="form" (ngSubmit)="processForm()">
+    <p>Ingredients <button type="button" (click)="addIngredient()">+</button></p>
+    <button type="button" (click)="bulkUpdateForLowStock()">Populate low stock groceries</button>
+    <table>
+        <tbody formArrayName="ingredientsArr" *ngFor="let ingredient of ingredientsArr.controls; let idx = index">
+            <tr [formGroupName]="idx">
+                <td>
+                    <select type="text" formControlName="itemId" #selectE1 (change)="onItemChange(selectE1.value, idx)">
+                        <option disabled selected value=""> -- select an item -- </option>
+                        <option *ngFor="let item of getFilteredItems(idx)" [value]="item.itemId">{{item.itemName}}</option>
+                    </select>
+                </td>
+                <td><input type="number" formControlName="quantity"></td>
+                <td><button type="button" (click)="removeIngredient(idx)">x</button></td>
+            </tr>
+        </tbody>
+        <tr>
+            <button type="submit" [disabled]="form.invalid">Update</button>
+        </tr>
+    </table>
+</form>
+
+<br><hr>
+<button type="button" [routerLink]="['/frontpage',userId]">Back</button>
+
+<ng-template #EmptyGrocery>
+    <p>Your grocery is empty!</p>
+</ng-template> -->
+
+<div class="header">
+    <h2 class="header-text">Grocery Page</h2>
+    <hr>
+    <button class="header-button" mat-raised-button color="primary" [routerLink]="['/grocery/item', userId]">Add new item</button>
+    &nbsp;
+    <button class="header-button" mat-raised-button color="primary" [routerLink]="['/grocery/record', userId]">Check inventory update records</button>
+    &nbsp;
+    <button class="header-button" mat-raised-button color="accent" [routerLink]="['/frontpage', userId]">Back to frontpage</button>
+</div>
+<hr>
+<div class="grid-container">
+    <div class="left-half">
+        <h3 class="heading-text">Update inventory</h3>
+        <div class="form-container">
+            <form [formGroup]="form" (ngSubmit)="processForm()">
+            <p class="heading2-text">Ingredients <button mat-icon-button class="icon-button-add" type="button" (click)="addIngredient()"><mat-icon>add</mat-icon></button></p>
+            <table>
+                <tbody formArrayName="ingredientsArr" *ngFor="let ingredient of ingredientsArr.controls; let idx = index">
+                <tr [formGroupName]="idx">
+                    <td>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Item</mat-label>
+                        <mat-select formControlName="itemId" #MatSelectE1 (selectionChange)="onItemChange(MatSelectE1.value, idx)">
+                            <mat-option disabled selected value=""> -- select an item -- </mat-option>
+                            <mat-option *ngFor="let item of getFilteredItems(idx)" [value]="item.itemId">{{ item.itemName }}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    </td>
+                    <td>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Quantity</mat-label>
+                        <input matInput type="number" formControlName="quantity">
+                    </mat-form-field>
+                    </td>
+                    <td><button mat-icon-button class="icon-button-delete" (click)="removeIngredient(idx)"><mat-icon>close</mat-icon></button></td>
+                </tr>
+                </tbody>
+                <tr>
+                <td colspan="2">
+                    <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Update</button>
+                    &nbsp;&nbsp;
+                    <button mat-raised-button color="accent" type="button" (click)="bulkUpdateForLowStock()">Populate low stock groceries</button>
+                </td>
+                </tr>
+            </table>
+            </form>
+        </div>
+      </div>
+
+    <div class="vertical-line"></div>
+
+    <div class="right-half">
+      <h3 class="heading-text">Ingredient Available</h3>
+      <table mat-table [dataSource]="groceries" *ngIf="groceries; else EmptyGrocery">
+        <ng-container matColumnDef="itemName">
+          <th class="table-text heading2-text" mat-header-cell *matHeaderCellDef>Item name</th>
+          <td class="table-text" mat-cell *matCellDef="let grocery">{{ grocery.itemName }}</td>
+        </ng-container>
+        <ng-container matColumnDef="quantity">
+          <th class="table-text heading2-text" mat-header-cell *matHeaderCellDef>Quantity</th>
+          <td class="table-text" mat-cell *matCellDef="let grocery">{{ grocery.quantity }} <span class="comment" *ngIf="checkLowStock(grocery.itemId,grocery.quantity)">(*low stock)</span></td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="['itemName', 'quantity']"></tr>
+        <tr mat-row *matRowDef="let row; columns: ['itemName', 'quantity']"></tr>
+      </table>
+      <br>
+    </div>
+</div>
+  
+<ng-template #EmptyGrocery>
+    <p class="empty-text">Your grocery is empty!</p>
+</ng-template>
+
+  

@@ -1,0 +1,87 @@
+.grid-container {
+    display: flex;
+  }
+  
+  .left-half, .right-half {
+    flex-basis: 50%;
+    padding: 10px;
+    text-align: center;
+  }
+
+  .vertical-line {
+    width: 1px;
+    background-color: #000;
+  }
+
+  .header-button {
+    margin-left: 40px;
+    margin-right: 40px;
+  }
+
+  h2 {
+    font-size: 30px;
+  }
+
+  .heading-text {
+    font-size:24px;
+    text-decoration: underline;
+    text-align: center;
+    color: #147d9d;
+  }
+
+  .heading2-text {
+    font-size: 18px;
+    color: #147d9d;
+    
+  }
+
+  .table-text {
+    text-align: center;
+  }
+
+  .header {
+    text-align: center;
+  }
+
+  .header-text,
+  .heading-text,
+  .heading2-text,
+  .header,
+  .table-text,
+  .empty-text,
+  button {
+    font-family: 'Galindo', cursive;
+  }
+  
+  .icon-button-delete {
+    margin-bottom: 20px;
+    vertical-align: middle;
+  }
+
+  .icon-button-add {
+    vertical-align: middle;
+  }
+
+  button:hover {
+    outline: 2px solid #2a88a4;
+    box-shadow: 0px 10px 20px rgba(67, 165, 178, 0.518);
+  }
+
+  .comment {
+    font-size: 12px;
+    color: red;
+  }
+
+  .form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .form-input {
+    padding-top: -20px;
+    padding-bottom: -20px;
+    margin-top: -20px;
+    margin-bottom: -20px;
+  }

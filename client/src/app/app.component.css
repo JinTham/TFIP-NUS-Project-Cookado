@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css?family=Shrikhand&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Galindo&display=swap');
+
+.app-bar {
+    background-color: #2196f3;
+    padding: 12px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .app-title {
+    color: #fff;
+    font-size: 36px;
+    margin: 0;
+    text-align: center;
+    font-weight: bold;
+    font-family: 'Shrikhand', cursive;
+  }

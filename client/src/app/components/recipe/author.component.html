@@ -1,0 +1,64 @@
+<div class="row-container">
+    <h3 class="header-text">{{authorName}}'s recipe list</h3>
+    <button mat-raised-button class="back-button" color="accent" [routerLink]="['/recipe/follow', userId]">Back</button>
+</div>
+<hr><br>
+<div class="follow-button">
+    <span *ngIf="!checkFollow">
+        <button class="follow-text" mat-raised-button color="primary" type="button" (click)="follow()">Follow {{authorName}}</button>
+    </span>
+    <span *ngIf="checkFollow">
+        <button class="follow-text" mat-raised-button color="accent" type="button" (click)="unfollow()">Unfollow {{authorName}}</button>
+    </span>
+</div>
+<br>
+<div class="grid-container">
+    <div class="left-section">
+        <table mat-table [dataSource]="recipeList" class="mat-elevation-z8" *ngIf="recipeList; else NoRecipes">
+            <ng-container matColumnDef="recipeTitle">
+              <th mat-header-cell *matHeaderCellDef>Recipe Title</th>
+              <td mat-cell *matCellDef="let recipe">{{recipe.recipe.recipeTitle}}</td>
+            </ng-container>
+            <ng-container matColumnDef="readyInMinutes">
+              <th mat-header-cell *matHeaderCellDef>Preparation time</th>
+              <td mat-cell *matCellDef="let recipe">{{recipe.recipe.readyInMinutes}}</td>
+            </ng-container>
+            <ng-container matColumnDef="cuisine">
+              <th mat-header-cell *matHeaderCellDef>Cuisine</th>
+              <td mat-cell *matCellDef="let recipe">{{recipe.recipe.cuisine}}</td>
+            </ng-container>
+            <ng-container matColumnDef="createDatetime">
+              <th mat-header-cell *matHeaderCellDef>Created datetime</th>
+              <td mat-cell *matCellDef="let recipe">{{recipe.createDatetime}}</td>
+            </ng-container>
+            <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef></th>
+              <td mat-cell *matCellDef="let recipe; let idx = index">
+                <button mat-raised-button color="primary" (click)="showRecipe(idx)">Show</button>
+              </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="['recipeTitle', 'readyInMinutes', 'cuisine', 'createDatetime', 'actions']"></tr>
+            <tr mat-row *matRowDef="let recipe; columns: ['recipeTitle', 'readyInMinutes', 'cuisine', 'createDatetime', 'actions']"></tr>
+          </table>
+    </div>
+
+    <div class="vertical-line"></div>
+
+    <div class="right-section">
+        <div *ngIf="showRecipeInfo">
+            <p><span class="recipe-title">{{recipeInfo.recipeTitle}} ({{recipeInfo.cuisine}}) --- {{recipeInfo.readyInMinutes}}min</span></p>
+            <img [src]="recipeInfo.image" alt="" width="200" height="200">
+            <p><strong>Summary: </strong><span [innerHTML]="recipeInfo.summary"></span></p>
+            <p><strong>Instructions: </strong><span [innerHTML]="recipeInfo.instructions"></span></p>
+            <div *ngFor="let ingredient of recipeInfo.extendedIngredients">
+            <i>{{ingredient.ingredientName}} -- {{ingredient.amount}}{{ingredient.unit}}</i>
+            </div>
+            <br>
+            <button mat-raised-button color="accent" type="button" (click)="hideRecipe()">Hide</button>
+        </div>
+    </div>
+</div>
+
+<ng-template #NoRecipes>
+    <p>No recipes created</p>
+</ng-template>

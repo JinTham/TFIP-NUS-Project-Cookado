@@ -1,0 +1,37 @@
+<div class="row-container">
+    <p class="header-text">Grocery update records</p>
+    <button class="back-button" mat-raised-button color="accent" [routerLink]="['/grocery', userId]">Back</button>
+</div>
+<hr>
+<ng-container *ngIf="groceryRecords; else NoRecords">
+    <table mat-table [dataSource]="groceryRecords" class="mat-elevation-z8">
+        <ng-container matColumnDef="itemName">
+            <th class="table-header" mat-header-cell *matHeaderCellDef><strong>Item Name</strong></th>
+            <td class="table-text" mat-cell *matCellDef="let record">
+                <ng-container *ngFor="let grocery of record.groceries">
+                    {{ grocery.itemName }}<br>
+                </ng-container>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="quantity">
+            <th class="table-header" mat-header-cell *matHeaderCellDef><strong>Quantity Change</strong></th>
+            <td class="table-text" mat-cell *matCellDef="let record">
+                <ng-container *ngFor="let grocery of record.groceries">
+                    {{ grocery.quantity }}<br>
+                </ng-container>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="timestamp">
+            <th class="table-header" mat-header-cell *matHeaderCellDef><strong>Time stamp</strong></th>
+            <td class="table-text" mat-cell *matCellDef="let record">{{ record.updateDatetime }}</td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="['itemName', 'quantity', 'timestamp']"></tr>
+        <tr mat-row *matRowDef="let record; columns: ['itemName', 'quantity', 'timestamp']"></tr>
+    </table>
+</ng-container>
+
+<ng-template #NoRecords>
+    <p class="empty-text">No record</p>
+</ng-template>
+

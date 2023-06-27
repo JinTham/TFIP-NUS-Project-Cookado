@@ -1,0 +1,35 @@
+<div class="container">
+  <h3 class="mat-headline login-heading">Login Page</h3>
+  <hr>
+  <form [formGroup]="form" (ngSubmit)="login()" class="login-form">
+    <table>
+      <tr>
+        <td>
+          <mat-form-field appearance="outline">
+            <mat-label class="form-label">Username</mat-label>
+            <input matInput type="text" formControlName="username">
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <mat-form-field appearance="outline">
+            <mat-label class="form-label">Email</mat-label>
+            <input matInput type="email" formControlName="email">
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2" class="button-container">
+          <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Login</button>
+          <button mat-raised-button color="accent" type="button" [disabled]="registerInvalid()" (click)="register()">Register</button>
+        </td>
+      </tr>
+    </table>
+    <p class="response-message">{{resp}}</p>
+  </form>
+</div>
+
+<div class="container">
+  <img src="assets/food.png" width="400" height="300">
+</div>

@@ -1,0 +1,32 @@
+<h4 class="mat-display-2 welcome-text">Welcome {{username}}!</h4>
+<div *ngIf="privilege" class="middle">
+  <button mat-button class="privileged-button" disabled>
+    <mat-icon class="button-icon">verified_user</mat-icon>
+    Privileged member
+  </button>
+</div>
+<div *ngIf="!privilege" class="middle">
+  <button mat-button class="privilege-button" [routerLink]="['/payment', userId]">
+    <mat-icon class="button-icon">favorite</mat-icon>
+    Interested in extra privilege?
+  </button>
+</div>
+<br><br>
+<div class="middle">
+  <button mat-button class="grocery-button" [routerLink]="['/grocery', userId]">
+    <span class="button-icon"><mat-icon>shopping_cart</mat-icon></span>
+    Go to grocery page
+  </button>
+  <button mat-button class="recipe-button" (click)="gotoRecipe()">
+    <span class="button-icon"><mat-icon>restaurant_menu</mat-icon></span>
+    Go to recipe page
+  </button>
+</div>
+<div class="middle">
+  <img src="assets/grocery.avif" width="300" height="300">
+  <img src="assets/cuisine.avif" width="300" height="300">
+</div>
+<br><hr>
+<div class="middle">
+  <button mat-raised-button class="logout-button" color="accent" [routerLink]="['/']">Logout</button>
+</div>
