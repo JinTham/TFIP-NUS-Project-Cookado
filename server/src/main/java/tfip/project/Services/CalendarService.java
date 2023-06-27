@@ -35,7 +35,7 @@ public class CalendarService {
     private static final String CREDENTIALS_FILE_PATH = "/credentials.json";
     private static final JsonFactory JSON_FACTORY = GsonFactory.getDefaultInstance();
     private static final List<String> SCOPES = Collections.singletonList(CalendarScopes.CALENDAR_EVENTS);
-    private static final String rootUrl = "http://localhost:4200/event";
+    private static final String rootUrl = "https://tfipcookado-production.up.railway.app/event";
     private static final String CALENDAR_ID = "primary";
     
     public String getAuthorizationUrl(String userId, String recipeTitle) throws IOException, GeneralSecurityException {

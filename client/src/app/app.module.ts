@@ -28,7 +28,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatSelectModule } from '@angular/material/select';
-import { IndexComponent } from './components/index.component';
 import { CalendarComponent } from './components/recipe/calendar.component';
 
 @NgModule({
@@ -48,7 +47,6 @@ import { CalendarComponent } from './components/recipe/calendar.component';
     AuthorComponent,
     CheckoutComponent,
     SuccessComponent,
-    IndexComponent,
     CalendarComponent
   ],
   imports: [

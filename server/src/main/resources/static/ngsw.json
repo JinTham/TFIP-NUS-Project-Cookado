@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1687837148685,
+  "timestamp": 1687872386232,
   "index": "/index.html",
   "assetGroups": [
     {
@@ -11,13 +11,12 @@
         "ignoreVary": true
       },
       "urls": [
-        "/644.52aa7f2c20fee91a.js",
         "/favicon.ico",
         "/index.html",
-        "/main.a5576ed6e9a76311.js",
+        "/main.8585eb331fa840f0.js",
         "/manifest.webmanifest",
-        "/polyfills.9235a755e281251e.js",
-        "/runtime.0ae52902f59ba7ed.js",
+        "/polyfills.4709fd955acb2242.js",
+        "/runtime.7ae29a296d479790.js",
         "/styles.e80792cf181eeafa.css"
       ],
       "patterns": []
@@ -48,7 +47,6 @@
   ],
   "dataGroups": [],
   "hashTable": {
-    "/644.52aa7f2c20fee91a.js": "d042ed49ca2a04904a2fffdb3a38385f066cc16b",
     "/assets/chef.png": "01858525065c33675590710043f43685cbadbcf7",
     "/assets/cuisine.avif": "1cd807eeec30d15fe3b47363ebbda3f56d870a01",
     "/assets/food.png": "c04a17f3e2b47198ad87367643d2371a84372ee2",
@@ -62,11 +60,11 @@
     "/assets/icons/icon-72x72.png": "c457e56089a36952cd67156f9996bc4ce54a5ed9",
     "/assets/icons/icon-96x96.png": "3914125a4b445bf111c5627875fc190f560daa41",
     "/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
-    "/index.html": "15cab8498bedd7d27ec0da85b494efdd69f5512a",
-    "/main.a5576ed6e9a76311.js": "f275e4c2627ba5d3b7d32f23405a25c33b9ebfbe",
+    "/index.html": "6b9058498789c17d81f075dcf3b9cac698ac85fc",
+    "/main.8585eb331fa840f0.js": "5b56617dab2048e410214f98aaf61c6f81ed2f12",
     "/manifest.webmanifest": "6bd446cf481e91dc7da6926e0d9b5fb2029c63fa",
-    "/polyfills.9235a755e281251e.js": "dc2040972c96a1161a07b121b72b16eb4e750032",
-    "/runtime.0ae52902f59ba7ed.js": "c2ba6f2f02940e110552d064b02c3b5260ed8ebd",
+    "/polyfills.4709fd955acb2242.js": "e84ccb31e4635abe840faa80b63e4b3d65ce4212",
+    "/runtime.7ae29a296d479790.js": "12cfdfd450f222fe2f70ddee2f8c81d4e8b4d5e7",
     "/styles.e80792cf181eeafa.css": "058af738d0e364f0b013fa7d56e70c6b709a8511"
   },
   "navigationUrls": [
