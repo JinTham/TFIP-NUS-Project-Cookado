@@ -70,5 +70,5 @@ export class RecipeService {
   getCookRecords(userId:string):Promise<any> {
     return lastValueFrom(this.httpClient.get<CookRecord>(this.SERVER_URL_RECIPE+'/cookrecord/'+userId,{headers:this.headers}))
   }
-
+  
 }

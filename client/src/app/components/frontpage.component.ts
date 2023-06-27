@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { GroceryService } from '../services/grocery.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Subscription, lastValueFrom } from 'rxjs';
 import { UserService } from '../services/user.service';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-frontpage',
@@ -17,7 +18,7 @@ export class FrontpageComponent implements OnInit{
   userId!:string
   privilege!:boolean
 
-  constructor(private userSvc:UserService, private actRoute:ActivatedRoute, private router:Router) { }
+  constructor(private userSvc:UserService, private actRoute:ActivatedRoute, private router:Router, private httpClient:HttpClient) { }
 
   async ngOnInit():Promise<void> {
     this.subParam$ = this.actRoute.params.subscribe(

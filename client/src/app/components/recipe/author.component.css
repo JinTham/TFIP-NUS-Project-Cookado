@@ -2,7 +2,7 @@
     display: flex;
   }
 
-  button:hover {
+button:hover {
     outline: 2px solid #2a88a4;
     box-shadow: 0px 10px 20px rgba(67, 165, 178, 0.518);
 }

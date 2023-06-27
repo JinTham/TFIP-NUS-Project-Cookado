@@ -1,0 +1,30 @@
+<div class="row-container">
+    <h3 class="header-text">Create event page</h3>
+</div>
+<hr><br>
+<form class="form" [formGroup]="form" (ngSubmit)="processForm()">
+    <div>
+        <mat-form-field appearance="outline">
+            <mat-label>Recipe title:</mat-label>
+            <input matInput type="text" formControlName="title">
+        </mat-form-field>
+    </div>
+    <div>
+        <mat-form-field appearance="outline">
+            <mat-label>Description:</mat-label>
+            <input matInput type="text" matTooltip="Optional" formControlName="description">
+        </mat-form-field>
+    </div>
+    <div>
+        <mat-form-field appearance="outline">
+            <mat-label>Cook Date</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="cookDate">
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+    </div>
+    <div class="button-container">
+        <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Create event</button>
+        <div class="button-space"></div>
+    </div>
+</form>

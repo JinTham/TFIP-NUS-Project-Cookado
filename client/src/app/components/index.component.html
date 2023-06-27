@@ -1,1 +1,17 @@
-<button (click)="loginWithGoogle()">Login with Google Account</button>
+<h3 class="form-header">Create Event</h3>
+
+<form class="form" [formGroup]="form" (ngSubmit)="createEvent()">
+    <div>
+        <label>Event title: </label>
+        <input matInput type="text" formControlName="title">
+    </div>
+    <div>
+        <label>Description: </label>
+        <input matInput type="text" matTooltip="Optional" formControlName="description">
+    </div>
+    <div class="button-container">
+        <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Schedule callback</button>
+        <div class="button-space"></div>
+    </div>
+</form>
+<br>

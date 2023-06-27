@@ -13,6 +13,8 @@ import { FollowComponent } from './components/recipe/follow.component';
 import { AuthorComponent } from './components/recipe/author.component';
 import { CheckoutComponent } from './components/payment/checkout.component';
 import { SuccessComponent } from './components/payment/success.component';
+import { IndexComponent } from './components/index.component';
+import { CalendarComponent } from './components/recipe/calendar.component';
 
 const routes: Routes = [
   {path:"",component:LoginComponent},
@@ -28,6 +30,7 @@ const routes: Routes = [
   {path:"recipe/author/:userId",component:AuthorComponent},
   {path:"payment/:userId",component:CheckoutComponent},
   {path:"payment/success/:userId",component:SuccessComponent},
+  {path:"event",component:CalendarComponent},
   {path:"**",redirectTo:"/",pathMatch:"full"}
 ];
 

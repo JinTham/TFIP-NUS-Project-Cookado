@@ -4,6 +4,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Cuisine } from 'src/app/models/cuisine';
 import { Recipe } from 'src/app/models/recipe';
+import { CalendarService } from 'src/app/services/calendar.service';
 import { RecipeService } from 'src/app/services/recipe.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -26,7 +27,7 @@ export class RecipeSearchComponent implements OnInit, OnDestroy {
   init:boolean = true
   privilege!:boolean
 
-  constructor(private fb:FormBuilder, private recipeSvc:RecipeService, private userSvc:UserService, private actRoute:ActivatedRoute, private router:Router) {}
+  constructor(private fb:FormBuilder, private recipeSvc:RecipeService, private userSvc:UserService, private actRoute:ActivatedRoute, private router:Router, private calendarSvc:CalendarService) {}
 
   async ngOnInit(): Promise<void> {
     this.sub$ = this.actRoute.params.subscribe(
@@ -91,6 +92,12 @@ export class RecipeSearchComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.sub$.unsubscribe()
+  }
+
+  insertGoogleCalendar(recipeTitle:string) {
+    this.calendarSvc.getOauthUrl(this.userId, recipeTitle).then((result: any) => {
+        window.location.href = result.response
+    })
   }
 
 }

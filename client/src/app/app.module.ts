@@ -14,9 +14,6 @@ import { GroceryListComponent } from './components/grocery/grocery-list.componen
 import { GroceryItemRecordComponent } from './components/grocery/grocery-item-record.component';
 import { RecipeSearchComponent } from './components/recipe/recipe-search.component';
 import { RecipeCreateComponent } from './components/recipe/recipe-create.component';
-import { AngularFireModule } from '@angular/fire/compat'; // Updated import statement
-import { AngularFireAuthModule } from '@angular/fire/compat/auth'; // Updated import statement
-import { environment } from '../environments/environment';
 import { FrontpageComponent } from './components/frontpage.component';
 import { LoginComponent } from './components/login.component';
 import { RecipeRecordComponent } from './components/recipe/recipe-record.component';
@@ -31,6 +28,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatSelectModule } from '@angular/material/select';
+import { IndexComponent } from './components/index.component';
+import { CalendarComponent } from './components/recipe/calendar.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +47,9 @@ import { MatSelectModule } from '@angular/material/select';
     FollowComponent,
     AuthorComponent,
     CheckoutComponent,
-    SuccessComponent
+    SuccessComponent,
+    IndexComponent,
+    CalendarComponent
   ],
   imports: [
     BrowserModule,
@@ -63,8 +64,6 @@ import { MatSelectModule } from '@angular/material/select';
     MaterialModule,
     ReactiveFormsModule,
     HttpClientModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireAuthModule,
     MatGridListModule,
     MatIconModule,
     MatButtonModule,

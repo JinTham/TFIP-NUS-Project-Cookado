@@ -1,25 +1,3 @@
-<!-- <form [formGroup]="form" (ngSubmit)="processForm()">
-    <table>
-        <tr>
-            <td>
-                <input type="text" formControlName="searchText" placeholder="Food name keyword">
-            </td>
-            <td>
-                <select formControlName="cuisine">
-                    <option selected value="">All cuisines</option>
-                    <option *ngFor="let cuisine of cuisineOptions.options" value="{{cuisine}}">{{cuisine}}</option>
-                </select>
-            </td>
-            <td>
-                <input type="number" formControlName="maxReadyTime" placeholder="Max preparation time">
-            </td>
-            <td>
-                <button type="submit" [disabled]="form.invalid">Search recipes</button>
-            </td>
-        </tr>
-    </table>
-</form> -->
-
 <div class="row-container">
     <p class="header-text">Recipe page</p>
     <button class="back-button" mat-raised-button color="accent" [routerLink]="['/frontpage', userId]">Back</button>
@@ -120,7 +98,8 @@
                 <i>{{ingredient.ingredientName}} -- {{ingredient.amount}}{{ingredient.unit}}</i>
                 </div>
                 <br>
-                <button type="button" (click)="cook(recipeInfo.recipeId,recipeInfo.recipeTitle)">Cook this!</button>
+                <button mat-raised-button color="primary" type="button" (click)="cook(recipeInfo.recipeId,recipeInfo.recipeTitle)">Cook this!</button>&nbsp;&nbsp;
+                <button mat-raised-button color="primary" type="button" (click)="insertGoogleCalendar(recipeInfo.recipeTitle)">Plan this meal!</button>
             </div>
         </div>
 </div>
@@ -128,42 +107,3 @@
 <ng-template #NoRecipes>
     <p>No recipe found</p>
 </ng-template>
-
-<!-- <div *ngIf="!init">
-    <h4>By Spoonacular</h4>
-    <div *ngIf="SpoonacularRecipes; else NoRecipes">
-        <div *ngFor="let recipe of SpoonacularRecipes; let idx = index">
-            <a (click)="getRecipeInfoSpoonacular(idx)">{{recipe.recipeTitle}}</a>
-            <img src="{{recipe.image}}" alt="" size="300">
-        </div>
-        <hr>
-    </div> 
-    <h4>By Users</h4> 
-    <div *ngIf="MongoRecipes; else NoRecipes">
-        <div *ngFor="let recipe of MongoRecipes; let idx = index">
-            <a (click)="getRecipeInfoMongo(idx)">{{recipe.recipeTitle}}</a>
-            <img src="{{recipe.image}}" alt="" size="300">
-        </div>
-        <hr>
-    </div>
-</div> -->
-
-<!-- <div *ngIf="recipeInfo">
-    <table>
-        <tr><td>{{recipeInfo.recipeTitle}} ({{recipeInfo.readyInMinutes}}min)</td></tr>
-        <tr><td>Author: {{recipeInfo.author}}
-            <span *ngIf="notSpoonacularRecipe(recipeInfo.author) && privilege">
-                <button type="button" (click)="toAuthorPage(recipeInfo.author)">View author</button>
-            </span>
-        </td></tr>
-        <tr><td>Cuisine: {{recipeInfo.cuisine}}</td></tr>
-        <tr><td>Summary: {{recipeInfo.summary}}</td></tr>
-        <tr><td>Instructions: {{recipeInfo.instructions}}</td></tr>
-        <tr><td>Ingredients: </td></tr>
-        <tr><div *ngFor="let ingredient of recipeInfo.extendedIngredients">
-                {{ingredient.ingredientName}} -- {{ingredient.amount}}{{ingredient.unit}}
-        </div></tr>
-        <tr><td><button type="button" (click)="cook(recipeInfo.recipeId,recipeInfo.recipeTitle)">Cook this!</button></td></tr>
-    </table>
-    <hr>
-</div> -->
